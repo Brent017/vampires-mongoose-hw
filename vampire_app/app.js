@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 // 2. Require your model (and possibly your extra data source);
 const Vampire = require('./models/vampire.js');
-// require('./populateVampires');
+const vampireArray = require('./populateVampires');
 // 3. Connect your database and collection name
 connectionString = 'mongodb://localhost/vampire';
 // 4. Open your mongoose connection
@@ -27,8 +27,77 @@ mongoose.connection.on('error', (err) => {
 /////////////////////////////////////////////////
 // INSERT USING MONGOOSE
 // ### Add the vampire data that we gave you
-
+Vampire.collection.insertMany(vampireArray, (err, data) => {
+	console.log("added provided vampire data");
+	mongoose.connection.close();
+})
 // ### Add some new vampire data
+// Vampire.create({
+// 	name: 'Nosferatu',
+// 	hair_color: 'black',
+// 	eye_color: 'black',
+// 	dob: 'June 6, 1921',
+// 	loves: ['creepy wall shadows', 'silent films'],
+// 	location: 'Wisborg, Germany',
+// 	gender: 'm',
+// 	victims: 22
+// }, (err, article) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(article);
+// }
+// });
+
+Vampire.create({
+	name: 'Carmilla',
+	hair_color: 'brown',
+	eye_color: 'brown',
+	dob: 'July 21, 1871',
+	loves: ['young women', 'turning into a cat-like creature'],
+	location: 'Styria, Austria',
+	gender: 'f',
+	victims: 3
+}, (err, article) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(article);
+}
+});
+
+Vampire.create({
+	name: 'Santanico Pandemonium',
+	hair_color: 'brown',
+	eye_color: 'brown',
+	dob: 'January 17, 1996',
+	location: 'Chihuahua, Mexico',
+	gender: 'f',
+	victims: 10
+}, (err, article) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(article);
+	}
+});
+
+Vampire.create({
+	name: 'Edward Cullen',
+	hair_color: 'brown',
+	eye_color: 'brown',
+	dob: 'November 21, 2008',
+	location: 'Forks, Washington',
+	gender: 'm',
+	victims: 2
+}, (err, article) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(article);
+	}
+});
+
 
 /////////////////////////////////////////////////
 // ## QUERYING
