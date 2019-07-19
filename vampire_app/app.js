@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 // 2. Require your model (and possibly your extra data source);
 const Vampire = require('./models/vampire.js');
-const vampireArray = require('./populateVampires');
+
 // 3. Connect your database and collection name
 connectionString = 'mongodb://localhost/vampire';
 // 4. Open your mongoose connection
@@ -27,10 +27,7 @@ mongoose.connection.on('error', (err) => {
 /////////////////////////////////////////////////
 // INSERT USING MONGOOSE
 // ### Add the vampire data that we gave you
-// Vampire.collection.insertMany(vampireArray, (err, data) => {
-// 	console.log("added provided vampire data");
-// 	// mongoose.connection.close();
-// })
+const vampireArray = require('./populateVampires');
 // ### Add some new vampire data
 // Vampire.create({
 // 	name: 'Nosferatu',
@@ -148,25 +145,44 @@ mongoose.connection.on('error', (err) => {
 // });
 /////////////////////////////////////////////////
 // ### Select by exists or does not exist
-Vampire.find({title: { $exists: true}}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find({title: { $exists: true}}, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
-Vampire.find({victims: { $exists: false}}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find({victims: { $exists: false}}, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
+// Vampire.find(
+// 	{title: { $exists: true},
+// 	victims: { $exists: false}
+// }, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
+
+// Vampire.find({victims: { $exists: true, $gt: 1000}}, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
+/////////////////////////////////////////////////
+// ### Select with OR
 Vampire.find(
-	{title: { $exists: true},
-	victims: { $exists: false}
+	{ $or: [{ location: 'New York, New York, US'}, {location: 'New Orleans, Louisiana, US'}]
 }, (err, vampires) => {
 	if(err){
 		console.log(err);
@@ -175,16 +191,35 @@ Vampire.find(
 	}
 });
 
-Vampire.find({victims: { $exists: true, $gt: 1000}}, (err, vampires) => {
+Vampire.find(
+	{ $or: [{ loves: 'brooding'}, { loves: 'being tragic'}]
+}, (err, vampires) => {
 	if(err){
 		console.log(err);
 	} else {
 		console.log(vampires);
 	}
 });
-/////////////////////////////////////////////////
-// ### Select with OR
 
+Vampire.find(
+	{ $or: [{ victims: { $gt: 1000}}, { loves: 'marshmallows'}]
+}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
+
+Vampire.find(
+	{ $or: [{ hair_color: 'red'}, {eye_color: 'green'}]
+	}, (err, vampires) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampires);
+		}
+	});
 /////////////////////////////////////////////////
 //### Select objects that match one of several values
 
