@@ -27,10 +27,10 @@ mongoose.connection.on('error', (err) => {
 /////////////////////////////////////////////////
 // INSERT USING MONGOOSE
 // ### Add the vampire data that we gave you
-Vampire.collection.insertMany(vampireArray, (err, data) => {
-	console.log("added provided vampire data");
-	mongoose.connection.close();
-})
+// Vampire.collection.insertMany(vampireArray, (err, data) => {
+// 	console.log("added provided vampire data");
+// 	// mongoose.connection.close();
+// })
 // ### Add some new vampire data
 // Vampire.create({
 // 	name: 'Nosferatu',
@@ -119,7 +119,9 @@ Vampire.collection.insertMany(vampireArray, (err, data) => {
 // 	}
 // });
 
-// Vampire.find({victims: { $lte: 150}}, (err, vampires) => {
+// Vampire.find(
+// 	{victims: { $lte: 150}
+// }, (err, vampires) => {
 // 	if(err){
 // 		console.log(err);
 // 	} else {
@@ -127,7 +129,9 @@ Vampire.collection.insertMany(vampireArray, (err, data) => {
 // 	}
 // });
 
-// Vampire.find({victims: { $ne: 210234}}, (err, vampires) => {
+// Vampire.find(
+// 	{victims: { $ne: 210234}
+// }, (err, vampires) => {
 // 	if(err){
 // 		console.log(err);
 // 	} else {
@@ -160,7 +164,10 @@ Vampire.find({victims: { $exists: false}}, (err, vampires) => {
 	}
 });
 
-Vampire.find({title: { $exists: true}}, {victims: { $exists: false}}, (err, vampires) => {
+Vampire.find(
+	{title: { $exists: true},
+	victims: { $exists: false}
+}, (err, vampires) => {
 	if(err){
 		console.log(err);
 	} else {
@@ -168,7 +175,7 @@ Vampire.find({title: { $exists: true}}, {victims: { $exists: false}}, (err, vamp
 	}
 });
 
-Vampire.find({victims: { $exists: true, $gt: 1000}} (err, vampires) => {
+Vampire.find({victims: { $exists: true, $gt: 1000}}, (err, vampires) => {
 	if(err){
 		console.log(err);
 	} else {
