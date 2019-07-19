@@ -103,48 +103,78 @@ Vampire.collection.insertMany(vampireArray, (err, data) => {
 // ## QUERYING
 /////////////////////////////////////////////////
 // ### Select by comparison
-Vampire.find({gender: 'f'}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find({gender: 'f'}, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
-Vampire.find({victims: { $gt: 500}}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find({victims: { $gt: 500}}, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
-Vampire.find({victims: { $lte: 150}}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find({victims: { $lte: 150}}, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
-Vampire.find({victims: { $ne: 210234}}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find({victims: { $ne: 210234}}, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
-Vampire.find({victims: { $gte: 150, $lte: 500}}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find({victims: { $gte: 150, $lte: 500}}, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 /////////////////////////////////////////////////
 // ### Select by exists or does not exist
+Vampire.find({title: { $exists: true}}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
 
+Vampire.find({victims: { $exists: false}}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
+
+Vampire.find({title: { $exists: true}}, {victims: { $exists: false}}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
+
+Vampire.find({victims: { $exists: true, $gt: 1000}} (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
 /////////////////////////////////////////////////
 // ### Select with OR
 
