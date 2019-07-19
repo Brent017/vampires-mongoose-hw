@@ -49,61 +49,99 @@ Vampire.collection.insertMany(vampireArray, (err, data) => {
 // }
 // });
 
-Vampire.create({
-	name: 'Carmilla',
-	hair_color: 'brown',
-	eye_color: 'brown',
-	dob: 'July 21, 1871',
-	loves: ['young women', 'turning into a cat-like creature'],
-	location: 'Styria, Austria',
-	gender: 'f',
-	victims: 3
-}, (err, article) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(article);
-}
-});
+// Vampire.create({
+// 	name: 'Carmilla',
+// 	hair_color: 'brown',
+// 	eye_color: 'brown',
+// 	dob: 'July 21, 1871',
+// 	loves: ['young women', 'turning into a cat-like creature'],
+// 	location: 'Styria, Austria',
+// 	gender: 'f',
+// 	victims: 3
+// }, (err, article) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(article);
+// }
+// });
 
-Vampire.create({
-	name: 'Santanico Pandemonium',
-	hair_color: 'brown',
-	eye_color: 'brown',
-	dob: 'January 17, 1996',
-	location: 'Chihuahua, Mexico',
-	gender: 'f',
-	victims: 10
-}, (err, article) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(article);
-	}
-});
+// Vampire.create({
+// 	name: 'Santanico Pandemonium',
+// 	hair_color: 'brown',
+// 	eye_color: 'brown',
+// 	dob: 'January 17, 1996',
+// 	location: 'Chihuahua, Mexico',
+// 	gender: 'f',
+// 	victims: 10
+// }, (err, article) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(article);
+// 	}
+// });
 
-Vampire.create({
-	name: 'Edward Cullen',
-	hair_color: 'brown',
-	eye_color: 'brown',
-	dob: 'November 21, 2008',
-	location: 'Forks, Washington',
-	gender: 'm',
-	victims: 2
-}, (err, article) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(article);
-	}
-});
+// Vampire.create({
+// 	name: 'Edward Cullen',
+// 	hair_color: 'brown',
+// 	eye_color: 'brown',
+// 	dob: 'November 21, 2008',
+// 	location: 'Forks, Washington',
+// 	gender: 'm',
+// 	victims: 2
+// }, (err, article) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(article);
+// 	}
+// });
 
 
 /////////////////////////////////////////////////
 // ## QUERYING
 /////////////////////////////////////////////////
 // ### Select by comparison
+Vampire.find({gender: 'f'}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
 
+Vampire.find({victims: { $gt: 500}}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
+
+Vampire.find({victims: { $lte: 150}}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
+
+Vampire.find({victims: { $ne: 210234}}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
+
+Vampire.find({victims: { $gte: 150, $lte: 500}}, (err, vampires) => {
+	if(err){
+		console.log(err);
+	} else {
+		console.log(vampires);
+	}
+});
 /////////////////////////////////////////////////
 // ### Select by exists or does not exist
 
