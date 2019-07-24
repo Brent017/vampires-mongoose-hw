@@ -181,48 +181,66 @@ const vampireArray = require('./populateVampires');
 // });
 /////////////////////////////////////////////////
 // ### Select with OR
-Vampire.find(
-	{ $or: [{ location: 'New York, New York, US'}, {location: 'New Orleans, Louisiana, US'}]
-}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find(
+// 	{ $or: [{ location: 'New York, New York, US'}, {location: 'New Orleans, Louisiana, US'}]
+// }, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
-Vampire.find(
-	{ $or: [{ loves: 'brooding'}, { loves: 'being tragic'}]
-}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find(
+// 	{ $or: [{ loves: 'brooding'}, { loves: 'being tragic'}]
+// }, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
-Vampire.find(
-	{ $or: [{ victims: { $gt: 1000}}, { loves: 'marshmallows'}]
-}, (err, vampires) => {
-	if(err){
-		console.log(err);
-	} else {
-		console.log(vampires);
-	}
-});
+// Vampire.find(
+// 	{ $or: [{ victims: { $gt: 1000}}, { loves: 'marshmallows'}]
+// }, (err, vampires) => {
+// 	if(err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(vampires);
+// 	}
+// });
 
-Vampire.find(
-	{ $or: [{ hair_color: 'red'}, {eye_color: 'green'}]
-	}, (err, vampires) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampires);
-		}
-	});
+// Vampire.find(
+// 	{ $or: [{ hair_color: 'red'}, {eye_color: 'green'}]
+// 	}, (err, vampires) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampires);
+// 		}
+// 	});
 /////////////////////////////////////////////////
 //### Select objects that match one of several values
-
+Vampire.find(
+	{ loves: {$eq: 'frilly shirtsleeves', $eq:'frilly collars'}}, (err, article) => {
+		console.log(article);
+	})
+Vampire.find({
+	loves: 'brooding'}, (err, article) => {
+	console.log(article);
+})
+Vampire.find({
+	loves: {$eq: 'appearing innocent', $eq: 'trickery', $eq: 'lurking in rotting mansions', $eq: 'R&B music'}}, (err, article) => {
+		console.log(article);
+})
+Vampire.find({$and: [
+	{loves: 'fancy cloaks'}, 
+	{loves: {$nin: ['top hats', 'virgin blood']}}, 
+	]},
+	(err, articleFound)=> {
+		console.log(articleFound);
+	})
 /////////////////////////////////////////////////
 //### Negative Selection
 
