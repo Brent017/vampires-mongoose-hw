@@ -222,28 +222,47 @@ const vampireArray = require('./populateVampires');
 // 	});
 /////////////////////////////////////////////////
 //### Select objects that match one of several values
-Vampire.find(
-	{ loves: {$eq: 'frilly shirtsleeves', $eq:'frilly collars'}}, (err, article) => {
-		console.log(article);
-	})
-Vampire.find({
-	loves: 'brooding'}, (err, article) => {
-	console.log(article);
-})
-Vampire.find({
-	loves: {$eq: 'appearing innocent', $eq: 'trickery', $eq: 'lurking in rotting mansions', $eq: 'R&B music'}}, (err, article) => {
-		console.log(article);
-})
+// Vampire.find(
+// 	{ loves: {$eq: 'frilly shirtsleeves', $eq:'frilly collars'}}, (err, article) => {
+// 		console.log(article);
+// 	})
+// Vampire.find({
+// 	loves: 'brooding'}, (err, article) => {
+// 	console.log(article);
+// })
+// Vampire.find({
+// 	loves: {$eq: 'appearing innocent', $eq: 'trickery', $eq: 'lurking in rotting mansions', $eq: 'R&B music'}}, (err, article) => {
+// 		console.log(article);
+// })
+// Vampire.find({$and: [
+// 	{loves: 'fancy cloaks'}, 
+// 	{loves: {$nin: ['top hats', 'virgin blood']}}, 
+// 	]},
+// 	(err, articleFound)=> {
+// 		console.log(articleFound);
+// 	})
+/////////////////////////////////////////////////
+//### Negative Selection
 Vampire.find({$and: [
-	{loves: 'fancy cloaks'}, 
-	{loves: {$nin: ['top hats', 'virgin blood']}}, 
+	{loves: 'ribbons'},
+	{eye_color: {$nin: ['brown']}},
 	]},
 	(err, articleFound)=> {
 		console.log(articleFound);
 	})
-/////////////////////////////////////////////////
-//### Negative Selection
-
+Vampire.find(
+	{location: {$nin: ['Rome']}}, (err, articleFound)=> {
+		console.log(articleFound);
+})
+Vampire.find(
+	{loves: {$nin: ['fancy cloaks', 'frilly shirtsleeves', 'appearing innocent', 'being tragic', 'brooding']}},
+	(err, articleFound)=> {
+		console.log(articleFound);
+	})
+Vampire.find(
+	{victims: {$lte: 200}}, (err, articleFound)=> {
+		console.log(articleFound);
+	})
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // ## REPLACE
